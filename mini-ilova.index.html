@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Tezlik O‘yini</title>
+    <style>
+        body {
+            background-color: #111;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+        }
+        #startButton, #clickButton {
+            padding: 20px 40px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background-color: #28a745;
+            color: white;
+        }
+        #clickButton {
+            display: none;
+            margin-top: 20px;
+        }
+        #result {
+            margin-top: 30px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Kim tezroq bosadi?</h1>
+    <p>Start tugmasini bosing, so‘ng tugma chiqqanida tezda bosing!</p>
+    <button id="startButton">Boshlash</button>
+    <button id="clickButton">Bos!</button>
+    <div id="result"></div>
+
+    <script>
+        const startButton = document.getElementById("startButton");
+        const clickButton = document.getElementById("clickButton");
+        const result = document.getElementById("result");
+
+        let startTime;
+
+        startButton.addEventListener("click", () => {
+            startButton.disabled = true;
+            result.textContent = "Kutib turing...";
+            clickButton.style.display = "none";
+
+            const delay = Math.floor(Math.random() * 3000) + 2000; // 2–5 soniya
+
+            setTimeout(() => {
+                result.textContent = "HOZIR!";
+                clickButton.style.display = "inline-block";
+                startTime = Date.now();
+            }, delay);
+        });
+
+        clickButton.addEventListener("click", () => {
+            const reactionTime = (Date.now() - startTime) / 1000;
+            result.textContent = Siz ${reactionTime.toFixed(3)} soniyada bosdingiz!;
+            clickButton.style.display = "none";
+            startButton.disabled = false;
+        });
+    </script>
+
+</body>
+</html>
